@@ -3,12 +3,12 @@
 The last stage of the data generation pipeline is to handle the output point cloud data to generate the ground truth labels needed for neural network training.
 
 <figure>
-  <img src="./figs/ipg_mov.png" alt="3D Road Preview of a sample scenario.">
+  <img src="./figs/ipg_mov.png" alt="">
   <figcaption>Figure 1.a: 3D Road Preview of a sample scenario. Courtesy of <a href="https://ipg-automotive.com/en/products-solutions/software/carmaker/">IPG Automotive</a>.</figcaption>
 </figure>
 
 <figure>
-  <img src="./figs/raw_pcd.png" alt="Generated point cloud visualization for the corresponding scene.">
+  <img src="./figs/raw_pcd.png" alt="">
   <figcaption>Figure 1.b: Generated point cloud visualization for the corresponding scene. </figcaption>
 </figure>
 
