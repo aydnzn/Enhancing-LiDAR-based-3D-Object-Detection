@@ -9,7 +9,7 @@ The last stage of the data generation pipeline is to handle the output point clo
 
 <figure>
   <img src="./figs/raw_pcd.png" alt="">
-  <figcaption>Figure 1.b: Generated point cloud visualization for the corresponding scene. </figcaption>
+  <figcaption>Figure 1.b: Generated point cloud visualization for the corresponding scene.</figcaption>
 </figure>
 
 
