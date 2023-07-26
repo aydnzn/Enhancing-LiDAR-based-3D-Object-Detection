@@ -36,4 +36,4 @@ Here is the JSON parameter configuration for the AVX simulation:
 }
 ```
 
-This configuration defines the setup and properties of the LiDAR sensor simulation. For more details, Please refer to the [full thesis document](./aydin_uzun_ms_thesis.pdf).
+This configuration defines the setup and properties of the LiDAR sensor simulation. For more details, Please refer to the [full thesis document](../../aydin_uzun_ms_thesis.pdf).
