@@ -10,3 +10,5 @@ As demonstrated in Figure 1, the sensor setup in the KITTI dataset places the la
 A noteworthy point is the distinction in the ego vehicle used in the simulations from the one used in the KITTI database, the VW Passat station wagon. Due to the unavailability of the asset file detailing the VW Passat's physical attributes for AVX, an alternative vehicle, the 2010 Audi A1 in blue, was chosen.
 
 However, the selection of the ego vehicle model or color doesn't significantly affect the LiDAR sensor simulation. The sensor's main role is to capture its surroundings, and any point cloud data from the ego vehicle is filtered out during preprocessing before feeding it into the neural network.
+
+Please refer to the [full thesis document](./aydin_uzun_ms_thesis.pdf) for a comprehensive understanding.
