@@ -26,8 +26,18 @@ The Object Sensor's position and orientation align with the LiDAR model, ensurin
 
 Refer to Figures 1.1a and 1.1b for visual representation of the Object Sensor's parameters and mounting.
 
-![Object Sensor Parameters](./figs/obj_sensor_param.png)
+<!-- ![Object Sensor Parameters](./figs/obj_sensor_param.png)
 *Figure 1.1a: Depicting the key parameters of CarMaker's Object Sensor. Courtesy of [IPG Automotive](https://ipg-automotive.com/en/products-solutions/software/carmaker/).*
 
 ![Sensor Mounting](./figs/obj_sensor_mounting.png)
-*Figure 1.1b: Illustrating the mounting procedure, showcasing the position, orientation, and attachment of the Object Sensor. Courtesy of [IPG Automotive](https://ipg-automotive.com/en/products-solutions/software/carmaker/).* 
+*Figure 1.1b: Illustrating the mounting procedure, showcasing the position, orientation, and attachment of the Object Sensor. Courtesy of [IPG Automotive](https://ipg-automotive.com/en/products-solutions/software/carmaker/).*  -->
+
+<figure>
+  <img src="./figs/obj_sensor_param.png" alt="Object Sensor Parameters">
+  <figcaption>Figure 1.1a: Depicting the key parameters of CarMaker's Object Sensor. Courtesy of <a href="https://ipg-automotive.com/en/products-solutions/software/carmaker/">IPG Automotive</a>.</figcaption>
+</figure>
+
+<figure>
+  <img src="./figs/obj_sensor_mounting.png" alt="Sensor Mounting">
+  <figcaption>Figure 1.1b: Illustrating the mounting procedure, showcasing the position, orientation, and attachment of the Object Sensor. Courtesy of <a href="https://ipg-automotive.com/en/products-solutions/software/carmaker/">IPG Automotive</a>.</figcaption>
+</figure>
