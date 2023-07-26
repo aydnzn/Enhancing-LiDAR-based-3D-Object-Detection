@@ -29,3 +29,30 @@ Each line in this format signifies a point in the point cloud.
 In this format, Xx, Yx, and Zx are the coordinates of the return for beam x, indicating the location of the point in a three-dimensional space. Ix represents the normalized amplitude of the current for beam x, a value that ranges from 0 to 1, where 1 corresponds to the maximum current. The variable Rx represents the return number for beam x.
 
 However, as the maximum return was previously set to 1, the value of Rx is consistently 1 for all points in the point cloud, rendering this parameter non-informative for the given data set.
+
+## LiDAR Contribution Output
+
+An additional output from the simulation run, which was activated as per the steps is the contribution output. This output consists of a text file containing an equal number of points as the point cloud output, in this case, 111,104 points. A brief excerpt from a sample contribution output:
+
+```plaintext
+
+34 1
+
+34 1
+...
+87 1
+34 1
+34 1
+34 1
+34 1
+```
+
+Each line in this output corresponds to a point in the point cloud, providing a list of contributors per beam. The structure for each row in the text file is as follows:
+
+* Int ID1 float C1 ... Int IDn float Cn
+
+Here, a contributor is a pair made up of an Entity Identification Number (EntityID) IDi and a contribution ratio Ci.
+
+Recall that the ’Max Return’ parameter was set to 1, meaning that each LiDAR beam was allowed to interact with a single object. Consequently, each line in the output presents a single EntityID with its associated contribution ratio of 1. The contribution output, in essence, reveals the identities of entities that each LiDAR beam has interacted with throughout the simulation.
+
+This dictionary offers the capacity to identify which EntityIDs are associated with which traffic object in the scene. By integrating this information with the contribution output, it becomes feasible to extract the object-specific point cloud – essentially, the point cloud of a traffic object – by filtering the points in the generated point cloud where the contributions stem from these specific EntityIDs.
