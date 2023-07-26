@@ -41,3 +41,15 @@ Refer to Figures 1.1a and 1.1b for visual representation of the Object Sensor's 
   <img src="./figs/obj_sensor_mounting.png" alt="Sensor Mounting">
   <figcaption>Figure 1.1b: Illustrating the mounting procedure, showcasing the position, orientation, and attachment of the Object Sensor. Courtesy of <a href="https://ipg-automotive.com/en/products-solutions/software/carmaker/">IPG Automotive</a>.</figcaption>
 </figure>
+
+
+## Developing Driving Simulation Scenarios
+
+A simulation scenario represents a specific sequence of conditions or events in the simulation. One of the fundamental steps in scenario development is creating road files, digital blueprints of the physical path for the vehicle to navigate. These files encompass various attributes, such as road length, width, curvature, banking, slope, and surface texture, to enhance the realism of the simulation environment. It's crucial to incorporate these road files into the AVX environment as track files for co-simulation.
+
+This study leverages pre-existing tracks from Ansys's Co-simulation database. The CarMaker Scenario Editor, besides enabling road network creation, allows the definition of routes for the test vehicle and traffic objects. The current focus is on creating new routes for the vehicle to follow during the simulation.
+
+<figure>
+  <img src="./figs/route.png" alt="Driving Simulation Scenario">
+  <figcaption>Figure 2: A representative driving simulation scenario with multiple vehicles, each with defined routes (red lines). The route for the ego vehicle (blue) is marked in yellow. This setup demonstrates how diverse scenarios can be created using a single track file. Courtesy of <a href="https://ipg-automotive.com/en/products-solutions/software/carmaker/">IPG Automotive</a>.</figcaption>
+</figure>
