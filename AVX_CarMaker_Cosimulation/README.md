@@ -53,3 +53,33 @@ This study leverages pre-existing tracks from Ansys's Co-simulation database. Th
   <img src="./figs/route.png" alt="Driving Simulation Scenario">
   <figcaption>Figure 2: A representative driving simulation scenario with multiple vehicles, each with defined routes (red lines). The route for the ego vehicle (blue) is marked in yellow. This setup demonstrates how diverse scenarios can be created using a single track file. Courtesy of <a href="https://ipg-automotive.com/en/products-solutions/software/carmaker/">IPG Automotive</a>.</figcaption>
 </figure>
+
+
+## Setting up Traffic Objects in CarMaker
+
+Traffic Objects in CarMaker, which include vehicles, pedestrians, or cyclists, are interactive elements in the simulation environment. 
+
+<figure>
+  <img src="./figs/carmaker_traffic.png" alt="Traffic Dialog">
+  <figcaption>Figure 3: Overview of the traffic dialog for scenario setup. Courtesy of <a href="https://ipg-automotive.com/en/products-solutions/software/carmaker/">IPG Automotive</a>.</figcaption>
+</figure>
+
+As shown in Figure 3, five different car objects, one cyclist, and two pedestrians are created for the given scenario.
+
+The setup process involves several steps:
+
+1. **Object Mode**: Define whether the object is movable with predefined motion or stationary.
+
+2. **Object Class**: Select the type of traffic object, in this case, 'Car', 'People', and 'Bicycle'.
+
+3. **Object Geometry & Parameters**: Define the visual and physical characteristics of the object. These details should match with the models in the AVX environment.
+
+4. **Object Dimensions**: Set the dimensions of the traffic object including length, width, and height.
+
+5. **Initial Orientation**: Adjust the object's initial orientation relative to the road.
+
+6. **Routes**: Assign routes defined to the traffic objects. The paths will guide the object's trajectory during the simulation.
+
+7. **Starting Position**: Specify the object's starting position in route coordinates.
+
+8. **Motion Model**: Assign a motion model for each traffic object.
