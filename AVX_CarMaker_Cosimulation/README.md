@@ -83,3 +83,20 @@ The setup process involves several steps:
 7. **Starting Position**: Specify the object's starting position in route coordinates.
 
 8. **Motion Model**: Assign a motion model for each traffic object.
+
+## Setting up Ego Vehicle's Maneuver
+
+A maneuver is a predefined sequence of actions or events that the vehicle is programmed to execute, including operations like acceleration, deceleration, turning, or following a specific path. After assigning a route to the ego vehicle, the next step involves defining its maneuver, outlining its behavior during the simulation.
+
+## Predefining Output Quantities for Post-Simulation Analysis
+
+Before initiating the simulation, it's crucial to select specific quantities that will be logged during the co-simulation. These chosen output quantities, aligned with the subsequent analysis requirements, facilitate the computation of the 3D bounding boxes.
+
+The key variables to record include:
+
+- Relative distances (x, y, z coordinates) from the Object Sensor to the traffic objects' reference points.
+- Rotational orientation (Euler angles in the ZYX convention) of the traffic objects as seen from the Object Sensor's frame at their respective reference points.
+
+Keeping these measurements for each traffic object assists in deriving the 3D bounding boxes. Additionally, the timestamps associated with each sensor signal update will be logged. The output of this process will be saved in a `.dat` file.
+
+The sampling frequency for this process is set at 100 Hz, aiming to generate ten unique bounding box candidates per traffic object for each point cloud.
