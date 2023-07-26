@@ -63,4 +63,4 @@ Key parameters in this module are:
 
 2. **Max Range**: 'Max range' indicates the furthest distance where a LiDAR sensor can reliably detect and measure objects. This parameter has been designated a value of 120m for the present simulation.
 
-Please refer to the [full thesis document](aydin_uzun_ms_thesis.pdf) for a comprehensive understanding of the system’s parametrization and detailed overview.
+Please refer to the [full thesis document](../../aydin_uzun_ms_thesis.pdf) for a comprehensive understanding of the system’s parametrization and detailed overview.
