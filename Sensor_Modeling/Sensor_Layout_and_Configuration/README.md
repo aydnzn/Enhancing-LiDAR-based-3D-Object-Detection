@@ -11,4 +11,4 @@ A noteworthy point is the distinction in the ego vehicle used in the simulations
 
 However, the selection of the ego vehicle model or color doesn't significantly affect the LiDAR sensor simulation. The sensor's main role is to capture its surroundings, and any point cloud data from the ego vehicle is filtered out during preprocessing before feeding it into the neural network.
 
-Please refer to the [full thesis document](./aydin_uzun_ms_thesis.pdf) for a comprehensive understanding.
+Please refer to the [full thesis document](aydin_uzun_ms_thesis.pdf) for a comprehensive understanding.
