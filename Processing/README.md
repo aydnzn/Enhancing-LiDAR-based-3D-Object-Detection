@@ -2,7 +2,7 @@
 
 The last stage of the data generation pipeline is to handle the output point cloud data to generate the ground truth labels needed for neural network training.
 
-<!-- <figure>
+<figure>
   <img src="./figs/ipg_mov.png" alt="">
   <figcaption>Figure 1.a: 3D Road Preview of a sample scenario. Courtesy of <a href="https://ipg-automotive.com/en/products-solutions/software/carmaker/">IPG Automotive</a>.</figcaption>
 </figure>
@@ -10,14 +10,7 @@ The last stage of the data generation pipeline is to handle the output point clo
 <figure>
   <img src="./figs/raw_pcd.png" alt="">
   <figcaption>Figure 1.b: Generated point cloud visualization for the corresponding scene.</figcaption>
-</figure> -->
-
-![3D Road Preview of a sample scenario. Courtesy of IPG Automotive.](./figs/ipg_mov.png)
-*Figure 1.a: 3D Road Preview of a sample scenario. Courtesy of [IPG Automotive](https://ipg-automotive.com/en/products-solutions/software/carmaker/).*
-
-![Generated point cloud visualization for the corresponding scene.](./figs/raw_pcd.png)
-*Figure 1.b: Generated point cloud visualization for the corresponding scene.*
-
+</figure>
 
 
 Figure 1.a shows a simulated scenario, created using the Ansys AVxcelerate CarMaker Co-Simulation. Figure 1.b provides a visual representation of the point cloud output from this scene.
