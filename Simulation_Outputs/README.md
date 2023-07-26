@@ -56,3 +56,11 @@ Here, a contributor is a pair made up of an Entity Identification Number (Entity
 Recall that the ’Max Return’ parameter was set to 1, meaning that each LiDAR beam was allowed to interact with a single object. Consequently, each line in the output presents a single EntityID with its associated contribution ratio of 1. The contribution output, in essence, reveals the identities of entities that each LiDAR beam has interacted with throughout the simulation.
 
 This dictionary offers the capacity to identify which EntityIDs are associated with which traffic object in the scene. By integrating this information with the contribution output, it becomes feasible to extract the object-specific point cloud – essentially, the point cloud of a traffic object – by filtering the points in the generated point cloud where the contributions stem from these specific EntityIDs.
+
+## OutputQuantities from CarMaker
+
+Data from CarMaker’s OutputQuantities provide useful information about the objects detected within the simulated environment. These objects are different types of traffic entities. As previously mentioned each data entry should record the relative position (given by Cartesian coordinates: x, y, z) and orientation (given by Euler angles: roll, pitch, and yaw) of these objects.
+
+In the data, individual objects are marked by specific tags like `BIC1`, `CAR1`, `CAR2`, and others. Each object is represented by six quantities: `ds.x`, `ds.y`, `ds.z`, `rzyx.x`, `rzyx.y`, `rzyx.z`. The `Time` field represents the timestamp of the data measurements, providing a reading every 0.01 seconds. This way, the sensor readings describe the relative position and orientation of each object in relation to the sensor at the exact time.
+
+The reference point is situated on the rear plane of the traffic object, specifically in the middle of the height-width plane.
