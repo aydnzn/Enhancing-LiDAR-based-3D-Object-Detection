@@ -268,3 +268,88 @@ The algorithm's implementation is complex and necessitates some discussion of it
   <img src="./figs/fov_filtered_pcd.png" alt="">
   <figcaption>Figure 5.b: Illustration of a sample point cloud after the application of field of view filtering.</figcaption>
 </figure>
+
+Each object is characterized by six distinct parameters: ds.x, ds.y, ds.z, rzyx.x, rzyx.y, and rzyx.z. However, rzyx.x and rzyx.y are disregarded in line with KITTI labels, which only consider the yaw angle, thus represented by rzyx.z. The bounding box’s center coordinates are determined by shifting ds.x and ds.y along the object’s orientation direction (i.e., rzyx.z) by half the object’s length. This shift is needed because the reference point of the traffic object is positioned on the rear-plane.
+
+With these parameters, 3D bounding boxes can now be defined by their center point, extent, and yaw angle. However, with ten bounding box candidates existing, an iterative process is employed. For each candidate center and yaw angle, an oriented bounding box is constructed at the center with the given extents and yaw angle. Then, the number of points from the object point cloud falling within each oriented bounding box candidate is computed. The oriented bounding box enclosing the maximum number of points is selected.
+
+<figure>
+  <img src="./figs/obb_candidates.png" alt="">
+  <figcaption>Figure 6: Depiction of 3D bounding box candidates associated with a car.</figcaption>
+</figure>
+
+Figure 6 highlights the importance of considering multiple candidate oriented bounding boxes during the selection process. This figure visually demonstrates the 3D bounding box candidates corresponding to a traffic object –— in this case, a car. This examination ensures the most encompassing and representative 3D bounding box is selected for each traffic object.
+
+To improve the representation of object dimensions, particularly for the 'Pedestrian' and 'Cyclist' categories, it is vital to refine the initial oriented bounding box, which is derived from CarMaker’s provided positions. Given the inherent structure and physical attributes of 'Pedestrian' and 'Cyclist', the corresponding point clouds can appear in irregular and scattered patterns, potentially resulting in a mismatch between the initial bounding box and the actual object point cloud. Therefore, it is necessary to verify the dimensional compatibility of the bounding box and the object point cloud along each axis.
+
+If the bounding box fails to encapsulate the object point cloud on any axis, the box must be expanded to match the object point cloud’s dimension on that axis. This expansion requires a recomputation of the box’s center. However, adjustments might still be necessary, even if an expansion is not required. Such cases typically occur when the point cloud lacks symmetry or when the distribution of points is uneven. Under these circumstances, the xy-plane center of the bounding box may not align with the point cloud’s center. This necessitates realigning the bounding box’s center in the xy-plane with the point cloud’s center, while maintaining the same z-coordinate.
+
+Figure 7 illustrates the critical nature of these adjustments and expansions. Figure 7.a shows a T-shaped pedestrian spreading their arms wide. The inner bounding box, derived from CarMaker, does not cover all points of the object, hence requiring expansion. Figure 7.b displays a cyclist. Here, the left bounding box (initial one) suggests an asymmetric object distribution, which is rectified in the right box (modified one).
+
+<figure>
+  <img src="./figs/expand_ped.png" alt="">
+  <figcaption>Figure 7.a: The inner box shows the bounding box before modification, the outer box shows the after expansion.</figcaption>
+</figure>
+
+<figure>
+  <img src="./figs/adjust_bic.png" alt="">
+  <figcaption>Figure 7.b: The left box shows the bounding box before modification, the right box shows after adjustment.</figcaption>
+</figure>
+
+
+These modifications ensure that the bounding box accurately encapsulates the spatial extent of the object in the LiDAR point cloud, thus enhancing object detection performance.
+
+The 'truncated' parameter is an essential part of the KITTI labels. This floating-point value, which ranges from 0 (non-truncated) to 1 (truncated), indicates the object’s visibility extent, with truncation correlating to the object’s deviation from image boundaries.
+
+This concept is visually exemplified in Figures 8.a and 8.b. Figure 8.a portrays a traffic object, 'Car', represented in a raw point cloud, while Figure 8.b displays the same object post the application of field of view filtering.
+
+
+<figure>
+  <img src="./figs/trunc1.png" alt="">
+  <figcaption>Figure 8.a: Raw object point cloud and its corresponding bounding box.</figcaption>
+</figure>
+
+<figure>
+  <img src="./figs/trunc2.png" alt="">
+  <figcaption>Figure 8.b: Filtered version of Figure 8.a.</figcaption>
+</figure>
+
+<figure>
+  <img src="./figs/trunc3.png" alt="">
+  <figcaption>Figure 8.c: Uniformly distributed hypothetical point cloud generated within the bounding box.</figcaption>
+</figure>
+
+<figure>
+  <img src="./figs/trunc4.png" alt="">
+  <figcaption>Figure 8.d: Filtered version of Figure 8.c.</figcaption>
+</figure>
+
+
+
+The necessity to compute the truncation value becomes evident upon noticing a discrepancy in the number of points enclosed within the bounding boxes in Figures 8.a and 8.b. When such a need arises, a uniformly distributed hypothetical point cloud is generated within the bounding box, as shown in Figure 8.c. Following this, the hypothetical point cloud undergoes filtering using the identical calibration parameters. The outcome, represented in Figure 8.d, is the filtered version of the hypothetical point cloud.
+
+The truncation value is subsequently derived as one minus the ratio of the number of points in the filtered hypothetical point cloud to the number in the original hypothetical point cloud. Consequently, for the example depicted in Figure 8, the computed truncation value is 0.9.
+
+
+
+Throughout this study, observations suggest that modifying the z-coordinate (height) of the established bounding boxes can lead to a better match with the genuine 3D object shape present in the point cloud data.
+
+For cars, the modification involved decreasing the z-coordinate by a value of 0.08m. This downward shift aimed to correct for an inherent offset present in the synthetic data generated by CarMaker, which resulted in the initial bounding boxes being slightly elevated above the road surface.
+
+Conversely, for 'Pedestrian' and 'Cyclist' objects, the bounding boxes were adjusted upward by increasing the z-coordinate by 0.02m. This modification was intended to exclude road surface points from the bounding boxes, thereby improving the accuracy of object representation.
+
+These adjustments, while based on observed patterns, cater specifically to the unique characteristics of the synthetic data set employed in this study. The adjustment values were chosen through a process of repeated visual inspections of the data, and their application may not be universally suitable for other data sets or simulation scenarios.
+
+In the concluding stage of this process, the oriented bounding box - characterized by its center, extent, and yaw angle - along with the truncation value, is converted into a label string following the KITTI label format, as referenced in section 3.4.2.2. This conversion was enabled through the use of the calibration matrix and the associated transformations discussed in the same section.
+
+Nonetheless, a lingering challenge remains: calculating the 'occluded' field in the KITTI label. Due to current project limitations, this aspect has not been addressed, resulting in all objects being labeled as 'fully visible'. This opens up a potential avenue for future refinement to further boost the representation in this synthetic data set.
+
+The label generation procedure concludes with the creation of labels for a synthetic point cloud. The resulting labels, formatted in KITTI style, are displayed in following table:
+
+| Type | Tr. | Occ. | Alpha | left | top | right | bottom | height | width | length | x | y | z | Rot. Y |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Car | 0.00 | 0 | -1.14 | 63.86 | 185.86 | 397.10 | 361.11 | 1.47 | 1.77 | 3.95 | -3.99 | 1.66 | 8.34 | -1.57 |
+| Car | 0.00 | 0 | -1.49 | 532.63 | 178.93 | 567.90 | 205.60 | 1.71 | 2.05 | 4.54 | -4.08 | 2.15 | 49.57 | -1.57 |
+
+In this context, 'Tr.' refers to 'truncated', 'Occ.' to 'occluded', and 'Rot. Y' signifies 'rotation_y'. This table presents the labels for two cars detected in the synthetic point cloud visualized in Figure 1.b.
+
