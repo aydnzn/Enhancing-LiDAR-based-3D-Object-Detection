@@ -122,39 +122,16 @@ Employing this methodology allowed for the calculation and filtering of the fiel
 The calibration parameters utilized in this study are as follows:
 
 1. **P<sup>(2)</sup><sub>rect</sub>**:
-\[
-\begin{bmatrix}
-7.21537720 \times 10^2 & 0.00000000 \times 10^0 & 6.09559326 \times 10^2 & 4.48572807 \times 10^1 \\
-0.00000000 \times 10^0 & 7.21537720 \times 10^2 & 1.72854004 \times 10^2 & 2.16379106 \times 10^{-1} \\
-0.00000000 \times 10^0 & 0.00000000 \times 10^0 & 1.00000000 \times 10^0 & 2.74588400 \times 10^{-3}
-\end{bmatrix}
-\]
+![](./figs/eq1.png)
 
 2. **R<sup>(0)</sup><sub>rect</sub>**:
-\[
-\begin{bmatrix}
-0.9999239 & 0.00983776 & -0.00744505 \\
--0.0098698 & 0.9999421 & -0.00427846 \\
-0.00740253 & 0.00435161 & 0.9999631
-\end{bmatrix}
-\]
+![](./figs/eq2.png)
 
 3. **T<sup>cam</sup><sub>velo</sub>**:
-\[
-\begin{bmatrix}
-7.53374491 \times 10^{-3} & -9.99971390 \times 10^{-1} & -6.16602018 \times 10^{-4} & -4.06976603 \times 10^{-3} \\
-1.48024904 \times 10^{-2} & 7.28073297 \times 10^{-4} & -9.99890208 \times 10^{-1} & -7.63161778 \times 10^{-2} \\
-9.99862075 \times 10^{-1} & 7.52379000 \times 10^{-3} & 1.48075502 \times 10^{-2} & -2.71780610 \times 10^{-1}
-\end{bmatrix}
-\]
+![](./figs/eq3.png)
 
 4. **image size**:
-\[
-\begin{bmatrix}
-375 & 1242
-\end{bmatrix}
-\]
-
+![](./figs/eq4.png)
 
 The calibration parameters are foundational to the process of projecting 3D points from the Velodyne’s LiDAR coordinate system onto the 2D image plane of the camera.
 
