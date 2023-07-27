@@ -305,22 +305,22 @@ This concept is visually exemplified in Figures 8.a and 8.b. Figure 8.a portrays
 
 
 <figure>
-  <img src="./figs/trunc1.png" alt="">
+  <img src="./figs/trunc_1.png" alt="">
   <figcaption>Figure 8.a: Raw object point cloud and its corresponding bounding box.</figcaption>
 </figure>
 
 <figure>
-  <img src="./figs/trunc2.png" alt="">
+  <img src="./figs/trunc_2.png" alt="">
   <figcaption>Figure 8.b: Filtered version of Figure 8.a.</figcaption>
 </figure>
 
 <figure>
-  <img src="./figs/trunc3.png" alt="">
+  <img src="./figs/trunc_3.png" alt="">
   <figcaption>Figure 8.c: Uniformly distributed hypothetical point cloud generated within the bounding box.</figcaption>
 </figure>
 
 <figure>
-  <img src="./figs/trunc4.png" alt="">
+  <img src="./figs/trunc_4.png" alt="">
   <figcaption>Figure 8.d: Filtered version of Figure 8.c.</figcaption>
 </figure>
 
