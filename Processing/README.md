@@ -240,3 +240,31 @@ This step involves mapping the instance names from the table to their respective
 
 [GenerateInstanceEntityIDMapping.py](../Python_scripts/GenerateInstanceEntityIDMapping.py) was developed to perform this task. 
 
+## Label Generation
+
+Label generation is a critical step when working with LiDAR point cloud data. [LidarPointCloudLabelGenerator.py](../Python_scripts/LidarPointCloudLabelGenerator.py) performs this task, processing LiDAR point cloud data directories and generating a corresponding set of labels that adhere to the KITTI label format. Each label is then stored in a distinct file that corresponds to a specific point cloud.
+
+The algorithm's implementation is complex and necessitates some discussion of its key features:
+
+- The algorithm first filters out blank lines in the contribution file and then removes the associated points in the point cloud. This step effectively eliminates beams that did not interact with any elements in the scene, causing their absence from the point cloud.
+  
+- The point cloud is subsequently transformed from LiDAR coordinates to rectified camera coordinates using the parameters and equations. These rectified points are projected onto an image plane using the camera parameters. A subsequent check ensures these projected points remain within the image boundaries and that the points' depth remains non-negative.
+
+- The algorithm then applies a specific range for point cloud filtration, defined as follows:
+  - Point Cloud Range [m] = [xmin = 0, ymin = -39.68, zmin = -3, xmax = 69.12, ymax = 39.68, zmax = 1]
+  This point cloud range is consistent with the parameters used for training and evaluating the network.
+  
+- The effect of field of view filtering on point clouds is demonstrated in Figure 5. Figure 5.a displays an initial state of a representative point cloud, while Figure 5.b shows the same point cloud after applying field of view filtering, visually highlighting the significant effect of this filtering method.
+
+- The next step is the extraction of object point clouds for each traffic object using the EntityIDs. Let's consider 'CAR1' as an object of interest; its dimensions can be found in the table. This object's relative position and orientation, as recorded by CarMaker's Object Sensor. Note that there are ten separate object scans indicating a reading frequency of every 0.01 seconds.
+
+
+<figure>
+  <img src="./figs/raw_pcd.png" alt="">
+  <figcaption>Figure 5.a: Illustration of a sample point cloud.</figcaption>
+</figure>
+
+<figure>
+  <img src="./figs/fov_filtered_pcd.png" alt="">
+  <figcaption>Figure 5.b: Illustration of a sample point cloud after the application of field of view filtering.</figcaption>
+</figure>
