@@ -97,7 +97,7 @@ Figure 3 and Figure 4 demonstrate two distinct car objects within the same scene
 Contrarily, consider the case presented in Figure 4. Assuming that the object’s point cloud is successfully extracted from the scene, determining the bounding box would be extremely difficult with the limited points available. To mitigate this issue, the Object Sensor in CarMaker is used. This sensor is capable of detecting objects and recording the relative position and orientation of these objects through Output quantities thereby aiding in overcoming these challenges.
 
 
-#### 3.4.2.2. Field of View Calculation and Label Conversion
+### Field of View Calculation and Label Conversion
 
 This research encountered several challenges related to the use and manipulation of the KITTI data set.
 
@@ -182,3 +182,9 @@ The labels for KITTI's object detection data set are stored within text files, w
 - **rotation_y:** Object rotation around y-axis in camera coordinates, ranging from -π to π.
 
 While the computation of all label fields except for 'occluded' was accomplished, the computation of this field is left as a valuable target for future work.
+
+## Processing Steps
+
+### Deletion of Identical Point Clouds
+
+We noticed some temporally successive point cloud outputs were identical, likely due to a bug in the AVX software. To ensure dataset integrity, these duplications had to be removed. This task was automated using a Python script named [IdenticalPointCloudDeletion.py](../Python_scripts/IdenticalPointCloudDeletion.py).
