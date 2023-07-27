@@ -122,16 +122,25 @@ Employing this methodology allowed for the calculation and filtering of the fiel
 The calibration parameters utilized in this study are as follows:
 
 1. **P<sup>(2)</sup><sub>rect</sub>**:
-![](./figs/eq1.png)
+<figure>
+  <img src="./figs/eq1.png" alt="P(2)rect">
+</figure>
 
 2. **R<sup>(0)</sup><sub>rect</sub>**:
-![](./figs/eq2.png)
+<figure>
+  <img src="./figs/eq2.png" alt="R(0)rect">
+</figure>
 
 3. **T<sup>cam</sup><sub>velo</sub>**:
-![](./figs/eq3.png)
+<figure>
+  <img src="./figs/eq3.png" alt="Tcamvelo">
+</figure>
 
 4. **image size**:
-![](./figs/eq4.png)
+<figure>
+  <img src="./figs/eq4.png" alt="image size">
+</figure>
+
 
 The calibration parameters are foundational to the process of projecting 3D points from the Velodyne’s LiDAR coordinate system onto the 2D image plane of the camera.
 
