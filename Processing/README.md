@@ -188,3 +188,19 @@ While the computation of all label fields except for 'occluded' was accomplished
 ### Deletion of Identical Point Clouds
 
 We noticed some temporally successive point cloud outputs were identical, likely due to a bug in the AVX software. To ensure dataset integrity, these duplications had to be removed. This task was automated using a Python script named [IdenticalPointCloudDeletion.py](../Python_scripts/IdenticalPointCloudDeletion.py).
+
+### Data Transformation
+
+This phase focuses on aligning the original AVX environment’s coordinate system with that of the KITTI Velodyne LiDAR’s coordinate system. 
+
+In the AVX environment the axes are defined as follows:
+
+- **Z-axis:** the front direction
+- **X-axis:** the left direction
+- **Y-axis:** to the upward direction
+
+The KITTI Velodyne LiDAR, however, operates on a different coordinate system. To align the two systems, a transformation is applied. This process is automated using [PointCloudTxtToNpyConverter.py](../Python_scripts/PointCloudTxtToNpyConverter.py). The transformed data, now adhering to the KITTI Velodyne LiDAR’s coordinate system, is saved as Numpy array files.
+
+### Conversion of JSON Files to Text
+
+An essential preprocessing step involves converting the LiDAR contribution dictionary from the JSON format to a more interpretable structure. This transformation aims to improve data readability by shifting the information into a text file format. [JsonToTxtConverter.py](../Python_scripts/JsonToTxtConverter.py) enables this conversion process.
