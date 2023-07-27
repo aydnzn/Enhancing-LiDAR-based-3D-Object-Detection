@@ -155,5 +155,6 @@ The calibration parameters utilized in this study are as follows:
 \end{bmatrix}
 \]
 
+
 The calibration parameters are foundational to the process of projecting 3D points from the Velodyne’s LiDAR coordinate system onto the 2D image plane of the camera.
 
