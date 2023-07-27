@@ -49,3 +49,49 @@ In conclusion, the main purpose here is to generate 3D bounding boxes for traffi
 - θ: yaw angle
 
 Subsequent to this, there is a requirement to transform these ground truth 3D bounding boxes into the KITTI label format.
+
+
+## Challenges
+
+Calculating 3D bounding boxes brings with it a set of challenges. These can be divided into two categories.
+
+### Deriving 3D Bounding Boxes from Point Cloud Data
+
+The task of deriving 3D bounding boxes from point cloud data, even when the points corresponding to a particular object are known, is considerably difficult. This is due to several inherent traits of point cloud data and the nature of three-dimensional objects.
+
+1. **Occlusions**: These occur when certain parts of an object are blocked or hidden by other entities within the scene, leading to an incomplete representation in the point cloud data.
+
+2. **Variations in Point Density**: Inconsistencies often exist in the density of points throughout the structure of an object in point cloud data. These irregularities cause unequal representations of the object, thereby making the exact computation of 3D bounding boxes more difficult. Areas with lower point density, which may contain crucial structural features, add to the challenge.
+
+3. **Orientation Determination**: Figuring out the correct orientation of the bounding box can be challenging. This is particularly difficult for three-dimensional objects that lack a clear ’up’ direction or where the primary axis is not clearly visible in the point cloud data.
+
+4. **Sparse Distribution of Point Clouds**: The point cloud data corresponding to each object are often sparsely distributed, adding to the difficulty in accurately determining bounding boxes.
+
+To better understand these challenges, consider the following example:
+
+
+<figure>
+  <img src="./figs/zout_1.png" alt="">
+  <figcaption>Figure 3.a: A sample synthetic point cloud; the yellow square indicates the traffic object of interest.</figcaption>
+</figure>
+
+<figure>
+  <img src="./figs/zoom_1.png" alt="">
+  <figcaption>Figure 3.b: Detailed view of the traffic object of interest in Figure 3.a.</figcaption>
+</figure>
+
+
+<figure>
+  <img src="./figs/zout_2.png" alt="">
+  <figcaption>Figure 4.a: A sample synthetic point cloud; the yellow square indicates the traffic object of interest.</figcaption>
+</figure>
+
+<figure>
+  <img src="./figs/zoom_2.png" alt="">
+  <figcaption>Figure 4.b: Detailed view of the traffic object of interest in Figure 4.a.</figcaption>
+</figure>
+
+
+Figure 3 and Figure 4 demonstrate two distinct car objects within the same scene. For the example given in Figure 3, the computation of the bounding box appears achievable as the object is unoccluded and the point density is relatively high. By visually inspecting the object, it can be identified as a car, and a rectangular bounding box could theoretically be fitted to determine its orientation and dimensions.
+
+Contrarily, consider the case presented in Figure 4. Assuming that the object’s point cloud is successfully extracted from the scene, determining the bounding box would be extremely difficult with the limited points available. To mitigate this issue, the Object Sensor in CarMaker is used. This sensor is capable of detecting objects and recording the relative position and orientation of these objects through Output quantities thereby aiding in overcoming these challenges.
