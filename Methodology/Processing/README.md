@@ -187,7 +187,7 @@ While the computation of all label fields except for 'occluded' was accomplished
 
 ### Deletion of Identical Point Clouds
 
-We noticed some temporally successive point cloud outputs were identical, likely due to a bug in the AVX software. To ensure dataset integrity, these duplications had to be removed. This task was automated using a Python script named [IdenticalPointCloudDeletion.py](../Python_scripts/IdenticalPointCloudDeletion.py).
+We noticed some temporally successive point cloud outputs were identical, likely due to a bug in the AVX software. To ensure dataset integrity, these duplications had to be removed. This task was automated using a Python script named [IdenticalPointCloudDeletion.py](../../Python_scripts/IdenticalPointCloudDeletion.py).
 
 ### Data Transformation
 
@@ -199,11 +199,11 @@ In the AVX environment the axes are defined as follows:
 - **X-axis:** the left direction
 - **Y-axis:** to the upward direction
 
-The KITTI Velodyne LiDAR, however, operates on a different coordinate system. To align the two systems, a transformation is applied. This process is automated using [PointCloudTxtToNpyConverter.py](../Python_scripts/PointCloudTxtToNpyConverter.py). The transformed data, now adhering to the KITTI Velodyne LiDAR’s coordinate system, is saved as Numpy array files.
+The KITTI Velodyne LiDAR, however, operates on a different coordinate system. To align the two systems, a transformation is applied. This process is automated using [PointCloudTxtToNpyConverter.py](../../Python_scripts/PointCloudTxtToNpyConverter.py). The transformed data, now adhering to the KITTI Velodyne LiDAR’s coordinate system, is saved as Numpy array files.
 
 ### Conversion of JSON Files to Text
 
-An essential preprocessing step involves converting the LiDAR contribution dictionary from the JSON format to a more interpretable structure. This transformation aims to improve data readability by shifting the information into a text file format. [JsonToTxtConverter.py](../Python_scripts/JsonToTxtConverter.py) enables this conversion process.
+An essential preprocessing step involves converting the LiDAR contribution dictionary from the JSON format to a more interpretable structure. This transformation aims to improve data readability by shifting the information into a text file format. [JsonToTxtConverter.py](../../Python_scripts/JsonToTxtConverter.py) enables this conversion process.
 
 
 ## Extraction of Traffic Object Dimensions
@@ -221,9 +221,9 @@ In the analysis, unique instances from the contribution dictionary are considere
 | PED1   | 0.410  | 0.600 | 1.664  |
 | PED2   | 0.373  | 0.600 | 1.781  |
 
-These dimensions are derived from a manually created list that includes dimensions for different models, covering all dimensions for the AVX traffic object assets. The completed list can be accessed in [ExtractInstanceDimensions.py](../Python_scripts/ExtractInstanceDimensions.py).
+These dimensions are derived from a manually created list that includes dimensions for different models, covering all dimensions for the AVX traffic object assets. The completed list can be accessed in [ExtractInstanceDimensions.py](../../Python_scripts/ExtractInstanceDimensions.py).
 
-[ExtractInstanceDimensions.py](../Python_scripts/ExtractInstanceDimensions.py) aids in performing this task. A sample output is presented in the table.
+[ExtractInstanceDimensions.py](../../Python_scripts/ExtractInstanceDimensions.py) aids in performing this task. A sample output is presented in the table.
 
 ## Mapping Instance Names to Entity Identifiers
 
@@ -238,11 +238,11 @@ This step involves mapping the instance names from the table to their respective
 7. PED1: [’223’, ’224’, ’225’, ’226’, ’227’, ’228’, ’229’]
 8. PED2: [’231’, ’232’, ’233’, ’234’, ’235’, ’236’, ’237’]
 
-[GenerateInstanceEntityIDMapping.py](../Python_scripts/GenerateInstanceEntityIDMapping.py) was developed to perform this task. 
+[GenerateInstanceEntityIDMapping.py](../../Python_scripts/GenerateInstanceEntityIDMapping.py) was developed to perform this task. 
 
 ## Label Generation
 
-Label generation is a critical step when working with LiDAR point cloud data. [LidarPointCloudLabelGenerator.py](../Python_scripts/LidarPointCloudLabelGenerator.py) performs this task, processing LiDAR point cloud data directories and generating a corresponding set of labels that adhere to the KITTI label format. Each label is then stored in a distinct file that corresponds to a specific point cloud.
+Label generation is a critical step when working with LiDAR point cloud data. [LidarPointCloudLabelGenerator.py](../../Python_scripts/LidarPointCloudLabelGenerator.py) performs this task, processing LiDAR point cloud data directories and generating a corresponding set of labels that adhere to the KITTI label format. Each label is then stored in a distinct file that corresponds to a specific point cloud.
 
 The algorithm's implementation is complex and necessitates some discussion of its key features:
 
