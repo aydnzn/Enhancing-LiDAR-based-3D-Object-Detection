@@ -204,3 +204,39 @@ The KITTI Velodyne LiDAR, however, operates on a different coordinate system. To
 ### Conversion of JSON Files to Text
 
 An essential preprocessing step involves converting the LiDAR contribution dictionary from the JSON format to a more interpretable structure. This transformation aims to improve data readability by shifting the information into a text file format. [JsonToTxtConverter.py](../Python_scripts/JsonToTxtConverter.py) enables this conversion process.
+
+
+## Extraction of Traffic Object Dimensions
+
+In the analysis, unique instances from the contribution dictionary are considered. Each instance corresponds to traffic object names. For every unique instance, the associated dimensions are noted down in a text file, as shown in the table:
+
+| Object | Length | Width | Height |
+|--------|--------|-------|--------|
+| CAR1   | 3.954  | 1.774 | 1.474  |
+| CAR2   | 4.542  | 2.050 | 1.710  |
+| CAR3   | 4.077  | 1.783 | 1.662  |
+| CAR4   | 3.653  | 1.679 | 1.506  |
+| CAR5   | 4.990  | 2.139 | 1.480  |
+| BIC1   | 1.600  | 0.600 | 1.580  |
+| PED1   | 0.410  | 0.600 | 1.664  |
+| PED2   | 0.373  | 0.600 | 1.781  |
+
+These dimensions are derived from a manually created list that includes dimensions for different models, covering all dimensions for the AVX traffic object assets. The completed list can be accessed in [ExtractInstanceDimensions.py](../Python_scripts/ExtractInstanceDimensions.py).
+
+[ExtractInstanceDimensions.py](../Python_scripts/ExtractInstanceDimensions.py) aids in performing this task. A sample output is presented in the table.
+
+## Mapping Instance Names to Entity Identifiers
+
+This step involves mapping the instance names from the table to their respective EntityIDs from the contribution dictionary. The result is a file documenting each instance name (traffic objects), with a list of its corresponding EntityIDs. The resulting data can be viewed:
+
+1. CAR1: [’136’, ’137’, ’138’, ’139’, ’140’, ’141’, ’142’, ’143’, ’144’, ’145’, ’146’, ’147’, ’148’, ’149’]
+2. CAR2: [’151’, ’152’, ’153’, ’154’, ’155’, ’156’, ’157’, ’158’, ’159’, ’160’, ’161’, ’162’, ’164’, ’166’, ’169’]
+3. CAR3: [’171’, ’172’, ’173’, ’174’, ’175’, ’176’, ’177’, ’178’, ’179’, ’180’, ’181’, ’182’, ’183’, ’184’, ’185’]
+4. CAR4: [’187’, ’188’, ’189’, ’190’, ’191’, ’192’, ’193’, ’194’, ’195’, ’196’, ’197’, ’199’, ’200’]
+5. CAR5: [’202’, ’203’, ’204’, ’205’, ’206’, ’207’, ’208’, ’209’, ’210’, ’211’, ’212’, ’213’, ’214’, ’215’, ’216’, ’217’, ’218’]
+6. BIC1: [’220’, ’221’]
+7. PED1: [’223’, ’224’, ’225’, ’226’, ’227’, ’228’, ’229’]
+8. PED2: [’231’, ’232’, ’233’, ’234’, ’235’, ’236’, ’237’]
+
+[GenerateInstanceEntityIDMapping.py](../Python_scripts/GenerateInstanceEntityIDMapping.py) was developed to perform this task. 
+
