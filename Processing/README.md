@@ -144,3 +144,41 @@ The calibration parameters utilized in this study are as follows:
 
 The calibration parameters are foundational to the process of projecting 3D points from the Velodyne’s LiDAR coordinate system onto the 2D image plane of the camera.
 
+A detailed walkthrough of the transformation process is provided below.
+
+For a 3D point in the LiDAR coordinate system in homogeneous coordinates, denoted as `p_lidar = [X, Y, Z, 1]^T`, the conversion process includes three essential steps:
+
+1. **Transform from Velodyne to Camera Coordinates:** Use the Velodyne-to-camera (`T_velo^cam`) calibration matrix to transform from the LiDAR to the camera coordinate system:
+    ```
+    p_cam = T_velo^cam × p_lidar
+    ```
+2. **Rectify the Camera Coordinates:** Apply the rectification rotation matrix `R_rect^(0)` to align the coordinates:
+    ```
+    p_rect = R_rect^(0) × p_cam
+    ```
+3. **Project to 2D:** Employ the rectified projection matrix `P_rect^(2)` to convert the 3D point from the rectified camera coordinate system to the 2D image plane of the camera:
+    ```
+    p_2D = P_rect^(2) × p_rect
+    ```
+    The resulting `P_2D` will be in homogeneous coordinates. To translate this to Cartesian coordinates, normalize the x and y values by the third coordinate:
+    ```
+    x = p_2D[0]/p_2D[2]
+    y = p_2D[1]/p_2D[2]
+    ```
+
+The final x and y coordinates align with the 2D point on the image plane originating from the 3D point in the LiDAR coordinate system. These calibration parameters establish the foundation for enabling the conversion from LiDAR to camera coordinates, subsequently facilitating projection onto the image plane. This allows for the filtering of the field of view prior to the creation of 3D bounding boxes.
+
+As highlighted in the objectives, the goal is to convert the 3D bounding boxes into the KITTI label format. However, to comprehend the potential benefits of this conversion, a brief overview of the KITTI labels is warranted.
+
+The labels for KITTI's object detection data set are stored within text files, with each line representing an individual object present within the scene. Each point cloud frame corresponds to a specific text file. The fields of each line are as follows:
+
+- **type:** Object class ('Car', 'Van', 'Truck', 'Pedestrian', 'Person_sitting', 'Cyclist', 'Tram', 'Misc', or 'DontCare').
+- **truncated:** Float (0-1), extent of the object outside image boundaries (0 = fully visible, 1 = invisible).
+- **occluded:** Integer (0, 1, 2, or 3), degree of object occlusion (0 = fully visible, 1 = partly occluded, 2 = largely occluded, 3 = unknown).
+- **alpha:** Observation angle of object, ranging from -π to π.
+- **bbox:** Four values defining 2D bounding box in image (x and y of top-left corner, x and y of bottom-right corner).
+- **dimensions:** Three values (height, width, length), object dimensions in camera coordinates (meters).
+- **location:** Three values (x,y,z), 3D location of object in camera coordinates (meters).
+- **rotation_y:** Object rotation around y-axis in camera coordinates, ranging from -π to π.
+
+While the computation of all label fields except for 'occluded' was accomplished, the computation of this field is left as a valuable target for future work.
