@@ -121,22 +121,22 @@ Employing this methodology allowed for the calculation and filtering of the fiel
 
 The calibration parameters utilized in this study are as follows:
 
-1. **P<sup>(2)</sup><sub>rect</sub>**:
+1. :
 <figure>
   <img src="./figs/eq1.png" alt="P(2)rect">
 </figure>
 
-2. **R<sup>(0)</sup><sub>rect</sub>**:
+2. :
 <figure>
   <img src="./figs/eq2.png" alt="R(0)rect">
 </figure>
 
-3. **T<sup>cam</sup><sub>velo</sub>**:
+3. :
 <figure>
   <img src="./figs/eq3.png" alt="Tcamvelo">
 </figure>
 
-4. **image size**:
+4. :
 <figure>
   <img src="./figs/eq4.png" alt="image size">
 </figure>
