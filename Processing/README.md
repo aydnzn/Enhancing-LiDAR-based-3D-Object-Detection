@@ -95,3 +95,65 @@ To better understand these challenges, consider the following example:
 Figure 3 and Figure 4 demonstrate two distinct car objects within the same scene. For the example given in Figure 3, the computation of the bounding box appears achievable as the object is unoccluded and the point density is relatively high. By visually inspecting the object, it can be identified as a car, and a rectangular bounding box could theoretically be fitted to determine its orientation and dimensions.
 
 Contrarily, consider the case presented in Figure 4. Assuming that the object’s point cloud is successfully extracted from the scene, determining the bounding box would be extremely difficult with the limited points available. To mitigate this issue, the Object Sensor in CarMaker is used. This sensor is capable of detecting objects and recording the relative position and orientation of these objects through Output quantities thereby aiding in overcoming these challenges.
+
+
+#### 3.4.2.2. Field of View Calculation and Label Conversion
+
+This research encountered several challenges related to the use and manipulation of the KITTI data set.
+
+Firstly, in the KITTI data set, objects are labeled within the field of view of a reference camera. This created a problem in the simulation setup, where no camera was present. The absence of a camera made the computation of the field of view impossible.
+
+Secondly, the conversion of 3D bounding boxes to the KITTI label format was necessary. This was needed to make use of existing resources made for KITTI, like neural network models trained on KITTI data. Also, using the KITTI format would make it easier to compare results with other KITTI-based research. Using this common format would also help in combining real and synthetic data sets, reducing possible data formatting issues that could affect test results.
+
+To address these issues, the calibration parameters used for conversions from LiDAR coordinates to camera coordinates and onto the camera image plane were explored. Upon observing minimal variations in these parameters, a constant calibration matrix was assumed. This assumption is regarded as valid since the relative pose and orientation of the sensors remain unchanged throughout the data generation process. In this particular setup, the Velodyne LiDAR sensor and the hypothetical camera maintain their relative positions during the entire simulation.
+
+A set of constant calibration parameters was subsequently implemented for each synthetic frame, borrowing from the parameters of a real frame from the KITTI data set. These parameters include:
+
+1. **P<sup>(2)</sup><sub>rect</sub>**: The projection matrix post-rectification for camera 2 (the left color camera). This matrix transforms 3D points in the rectified camera coordinate system to 2D points in the image plane. It is a matrix of size 3 × 4.
+
+2. **R<sup>(0)</sup><sub>rect</sub>**: The rectifying rotation matrix. This matrix aligns the 3D points in the camera coordinate system with the axes of the rectified coordinate system. It is a matrix of size 3 × 3.
+
+3. **T<sup>cam</sup><sub>velo</sub>**: The transformation matrix, which converts 3D points from the LiDAR (Velodyne) coordinate system to the camera coordinate system. The first 3x3 segment is the rotation matrix, and the last column represents the translation vector. It is a matrix of size 3 × 4.
+
+4. **image size**: The dimensions of the camera-generated image in pixels. This 1 × 2 matrix has the height of the image (375 pixels) as the first element and the width of the image (1242 pixels) as the second element.
+
+Employing this methodology allowed for the calculation and filtering of the field of view prior to creating the 3D bounding boxes and converting these boxes into the KITTI label format. This approach ensured the preservation of the KITTI data set’s integrity and structure while supplementing synthetic data.
+
+The calibration parameters utilized in this study are as follows:
+
+1. **P<sup>(2)</sup><sub>rect</sub>**:
+\[
+\begin{bmatrix}
+7.21537720 \times 10^2 & 0.00000000 \times 10^0 & 6.09559326 \times 10^2 & 4.48572807 \times 10^1 \\
+0.00000000 \times 10^0 & 7.21537720 \times 10^2 & 1.72854004 \times 10^2 & 2.16379106 \times 10^{-1} \\
+0.00000000 \times 10^0 & 0.00000000 \times 10^0 & 1.00000000 \times 10^0 & 2.74588400 \times 10^{-3}
+\end{bmatrix}
+\]
+
+2. **R<sup>(0)</sup><sub>rect</sub>**:
+\[
+\begin{bmatrix}
+0.9999239 & 0.00983776 & -0.00744505 \\
+-0.0098698 & 0.9999421 & -0.00427846 \\
+0.00740253 & 0.00435161 & 0.9999631
+\end{bmatrix}
+\]
+
+3. **T<sup>cam</sup><sub>velo</sub>**:
+\[
+\begin{bmatrix}
+7.53374491 \times 10^{-3} & -9.99971390 \times 10^{-1} & -6.16602018 \times 10^{-4} & -4.06976603 \times 10^{-3} \\
+1.48024904 \times 10^{-2} & 7.28073297 \times 10^{-4} & -9.99890208 \times 10^{-1} & -7.63161778 \times 10^{-2} \\
+9.99862075 \times 10^{-1} & 7.52379000 \times 10^{-3} & 1.48075502 \times 10^{-2} & -2.71780610 \times 10^{-1}
+\end{bmatrix}
+\]
+
+4. **image size**:
+\[
+\begin{bmatrix}
+375 & 1242
+\end{bmatrix}
+\]
+
+The calibration parameters are foundational to the process of projecting 3D points from the Velodyne’s LiDAR coordinate system onto the 2D image plane of the camera.
+
