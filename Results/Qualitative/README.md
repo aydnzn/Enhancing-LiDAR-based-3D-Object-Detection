@@ -23,7 +23,7 @@ Two videos are provided for visualization. Both maintain a frame rate of 0.5 fra
 
 <figure>
   <img src="./figs/fig1.png" alt="">
-  <figcaption>Color-coded detection results</figcaption>
+  <figcaption>Figure 1: Color-coded detection results</figcaption>
 </figure>
 
 Upon examining the results, false positives are evident primarily due to the low confidence threshold. Despite this, all positive samples within the frames have been detected. The impact of data imbalance on detection results is evident where short traffic poles are incorrectly classified as pedestrians.
@@ -44,8 +44,8 @@ The corresponding videos for visualization are:
 2. [Video 4](https://github.com/aydnzn/Master-Thesis-Supplements/blob/main/video_4.mp4) corresponds to the KITTI benchmark network.
 
 <figure>
-  <img src="../figs/fig2.png" alt="">
-  <figcaption>Color-coded detection results on KITTI</figcaption>
+  <img src="./figs/fig2.png" alt="">
+  <figcaption>Figure 2: Color-coded detection results on KITTI</figcaption>
 </figure>
 
 Similar to the previous analysis, false positives are present due to the low confidence threshold. However, all labeled ground truths are successfully detected by both networks. The impact of 'DontCare' labels is also evident, as two parked cars far from the camera are detected but do not contribute to false positive calculations in the AP score computation.
