@@ -1,6 +1,7 @@
 import os
 import shutil
 import random
+############################## folders for train
 # folders = ['WS03', 'Bridge Concrete AVX','Bridge Steel AVX', 'City AVX','Country AVX', 
 #            'Country LHT AVX', 'Country Meander','Country US AVX', 'Highway AVX', 'Highway Japan AVX', 
 #            'City AVX v2.2', 'City AVX v3', 'City AVX v4', 'City AVX v5', 'City AVX v6',
@@ -13,12 +14,14 @@ import random
 #            'Highway AVX v7','Highway AVX v8','Highway AVX v9','Highway AVX v10',
 #            'Bridge Concrete AVX v4','Bridge Concrete AVX v5','Bridge Concrete AVX v6','Bridge Concrete AVX v7','Bridge Concrete AVX v8','Bridge Concrete AVX v9','Bridge Concrete AVX v10',
 #            'Country AVX v14','Country AVX v15','Country AVX v16','Country AVX v17','Country AVX v18','Country AVX v19','Country AVX v20']
-folders = ['MCity Flat AVX v12', 'MCity Flat AVX v13', 'MCity Flat AVX v14', 'MCity Flat AVX v15', 'MCity Flat AVX v16',
-           'MCity Flat AVX v17', 'MCity Flat AVX v18', 'MCity Flat AVX v19', 'MCity Flat AVX v20', 'Highway Japan AVX v2', 'Highway Japan AVX v3',
-           'Highway Japan AVX v4', 'Highway Japan AVX v5', 'Highway Japan AVX v6', 'Highway Japan AVX v7','Highway Japan AVX v8',
-           'Highway Japan AVX v10','Highway Japan AVX v11','Highway Japan AVX v12','Highway Japan AVX v13','Highway Japan AVX v14',
-           'Country AVX v21','Country AVX v22','Country AVX v23','City AVX v8','City AVX v9','City AVX v10','City AVX v11','City AVX v12','City AVX v13','City AVX v14']
+############################# folder for Evaluation
+# folders = ['MCity Flat AVX v12', 'MCity Flat AVX v13', 'MCity Flat AVX v14', 'MCity Flat AVX v15', 'MCity Flat AVX v16',
+#            'MCity Flat AVX v17', 'MCity Flat AVX v18', 'MCity Flat AVX v19', 'MCity Flat AVX v20', 'Highway Japan AVX v2', 'Highway Japan AVX v3',
+#            'Highway Japan AVX v4', 'Highway Japan AVX v5', 'Highway Japan AVX v6', 'Highway Japan AVX v7','Highway Japan AVX v8',
+#            'Highway Japan AVX v10','Highway Japan AVX v11','Highway Japan AVX v12','Highway Japan AVX v13','Highway Japan AVX v14',
+#            'Country AVX v21','Country AVX v22','Country AVX v23','City AVX v8','City AVX v9','City AVX v10','City AVX v11','City AVX v12','City AVX v13','City AVX v14']
 
+folders = '...'
 src_dir = '..'  # Assuming the script is located in a subfolder of the parent directory
 # Destination directories for labels and point cloud data
 dst_labels_dir = os.path.join(src_dir, 'AVX_DATA\Version_7\Test\labels')
