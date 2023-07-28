@@ -10,7 +10,7 @@ Visual representations of detection results are available as video demonstration
 - [Master Thesis Supplements repository](https://github.com/aydnzn/Master-Thesis-Supplements)
 
 <figure>
-  <img src="../figs/synth_scene.png" alt="">
+  <img src="./figs/synth_scene.png" alt="">
   <figcaption>Synthetic scene from Co-simulation. Courtesy of <a href="https://ipg-automotive.com/en/products-solutions/software/carmaker/">IPG Automotive</a>.</figcaption>
 </figure>
 
@@ -22,7 +22,7 @@ Two videos are provided for visualization. Both maintain a frame rate of 0.5 fra
 
 
 <figure>
-  <img src="../figs/fig1.png" alt="">
+  <img src="./figs/fig1.png" alt="">
   <figcaption>Color-coded detection results</figcaption>
 </figure>
 

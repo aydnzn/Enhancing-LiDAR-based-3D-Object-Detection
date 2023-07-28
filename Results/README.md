@@ -4,7 +4,6 @@ This repository contains the results and discussion of my master's thesis, broke
 
 ## Quantitative Results
 ### Experiment1
-# Experiment 1 Results
 
 <figure>
   <img src="./Quantitative/figs/table_1.png" alt="">
