@@ -93,16 +93,15 @@ The experiments were conducted using Python 3.10.6, compiled with GCC 11.3.0. Tr
 
 ## Training and Evaluation
 
-For the training and evaluation stages, the [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) platform will be used.
+The [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) platform is utilized for training and evaluation.
 
-Go to for Installation : [INSTALL.md](https://github.com/open-mmlab/OpenPCDet/blob/master/docs/INSTALL.md)
-But first fulfill requirements!
+Ensure to install OpenPCDet as described in [INSTALL.md](https://github.com/open-mmlab/OpenPCDet/blob/master/docs/INSTALL.md) after fulfilling all requirements.
 
 ### Dataset Preparation
 
 #### KITTI Dataset
 
-Please download the official [KITTI 3D object detection](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d) dataset and organize the downloaded files as follows.
+First, download the official [KITTI 3D object detection](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=3d) dataset and organize it as follows:
 
 ```
 OpenPCDet
@@ -115,11 +114,53 @@ OpenPCDet
 ├── tools
 ```
 
-Transfer the files (kitti_training_train.7z)https://drive.google.com/file/d/1W0JvxEo4zHE2B_NkSzU7ZCalocEWlVqB/view?usp=share_link) and [kitti_training_val.7z](https://drive.google.com/file/d/1r2a6aX7GURQHm1ydgB1pySmIN3ygmf6p/view?usp=share_link) to `./OpenPCDet/data` on the VM, and proceed to extract them there. 
+Transfer the [kitti_training_train.7z](https://drive.google.com/file/d/1W0JvxEo4zHE2B_NkSzU7ZCalocEWlVqB/view?usp=share_link) and [kitti_training_val.7z](https://drive.google.com/file/d/1r2a6aX7GURQHm1ydgB1pySmIN3ygmf6p/view?usp=share_link) files to `./OpenPCDet/data` on the VM and extract them. These files are identical to the downloaded KITTI data, but are split into training and validation sets for your convenience.
 
-These files are identical to the downloaded KITTI data, but they've been split into training and validation sets for convenience. Specifically, the 'kitti_training_train' folder includes only the training samples. These partitioned datasets will facilitate the creation of combined databases.
+### Creating Custom Training Sets
+
+For custom training sets, copy the [create_trainset.py](../VM_scripts/create_trainset.py) script to `./OpenPCDet/`. 
+
+Modify parameters like `dataset_name`, `my_data_size`, and `percent_synthtetic` as per your requirements. E.g., if you want a training set with 90% synthetic and 10% KITTI data, set `percent_synthtetic` to 0.9.
+
+The KITTI training data typically contains 3,712 samples. If you wish to create a training set using only a fraction of the KITTI samples, set `percent_synthtetic` to 0 and adjust `my_data_size`. E.g., for a 20% KITTI training set, set `my_data_size` to (3712*0.2).
+
+### Creating Custom Test Sets
+
+For custom test sets, copy the [create_testset_avx.py](../VM_scripts/create_testset_avx.py) and [create_testset_kitti.py](../VM_scripts/create_testset_kitti.py) scripts into `./OpenPCDet/`. Ensure you correctly specify the directory names in the scripts.
+
+Next, move [AVX_testset_KITTI.yaml](../cfgs/AVX_testset_KITTI.yaml) and [KITTI_testset_KITTI.yaml](../cfgs/KITTI_testset_KITTI.yaml) files to `./OpenPCDet/tools/cfgs/dataset_configs/`.
+
+Transfer the [kitti_dataset.py](../VM_scripts/kitti_dataset.py) file to `./OpenPCDet/pcdet/datasets/kitti/`. Make sure to update the `data_path` and `save_path` parameters to match your specific requirements.
 
 
+For instance, if you want to create a test set with only synthetic samples, set the following values in the `kitti_dataset.py` script:
 
+```python
+data_path=ROOT_DIR / 'data' / 'AVX_testset'
+save_path=ROOT_DIR / 'data' / 'AVX_testset'
+```
 
+Make sure to comment out the sections of the [kitti_dataset.py](../VM_scripts/kitti_dataset.py) related to training, while leaving the testing related sections uncommented:
 
+```python
+##################### for TEST
+# For Test use this part, for Train comment this part
+dataset.set_split(val_split)
+kitti_infos_val = dataset.get_infos(num_workers=workers, has_label=True, count_inside_pts=True)
+with open(val_filename, 'wb') as f:
+    pickle.dump(kitti_infos_val, f)
+print('Kitti info val file is saved to %s' % val_filename)
+##################### END for TEST
+```
+Now, run the following commands to create the data info:
+
+```console
+python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/ AVX_testset_KITTI.yaml 
+```
+and
+```console
+python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/ KITTI_testset_KITTI.yaml 
+```
+This data info will store necessary parameters, such as bounding box information, for training and evaluation.
+
+For additional details, refer to [GETTING_STARTED.md](https://github.com/open-mmlab/OpenPCDet/blob/master/docs/GETTING_STARTED.md).
