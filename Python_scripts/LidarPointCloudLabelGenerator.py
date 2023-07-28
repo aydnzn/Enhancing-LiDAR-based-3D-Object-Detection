@@ -551,5 +551,11 @@ for file in files:
     if red_flag:
         save_labels(modified_dir,label_file,'')
     else:
-        filtered_bboxes = [bbox for bbox in bboxes if bbox is not None]
+        # Comment out the following part if you want to visualize the bounding boxes
+        # filtered_bboxes = [bbox for bbox in bboxes if bbox is not None]
+        # bbox_array = np.array(filtered_bboxes)
+        # bbox_array = np.squeeze(bbox_array)
+        # bbox_array = np.reshape (bbox_array, (bbox_array.shape [0], -1))
+        # V_mayavi.draw_scenes (points=filt_filt_points, gt_boxes = bbox_array )
+        # mlab.show(stop=True)
         save_labels(modified_dir,label_file,line)

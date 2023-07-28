@@ -11,7 +11,7 @@ The readme also explores the scenario where model parameters are saved after eve
 
 <figure>
   <img src="./figs/fig1.png" alt="">
-  <figcaption>Performance comparison of different training approaches on the AP 3D scores for ’Car’ and ’Cyclist’</figcaption>
+  <figcaption>Figure 1: Performance comparison of different training approaches on the AP 3D scores for ’Car’ and ’Cyclist’</figcaption>
 </figure>
 
 Above figures show that pre-training followed by fine-tuning yields competitive scores as early as the tenth epoch, emphasizing the significance of synthetic data in quickly optimizing parameters and adapting perception systems for real-time use.
