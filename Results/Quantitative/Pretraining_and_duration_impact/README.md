@@ -10,7 +10,7 @@ Pre-training elevates the AP_3D scores from 66.02 (Car) and 49.93 (Cyclist) to 6
 The readme also explores the scenario where model parameters are saved after every tenth epoch and evaluated on the KITTI dataset. The AP_3D scores achieved within less than 10 minutes for 10 epochs indicate the efficiency of training time, with competitive scores being achieved far quicker compared to 80 epochs, which take approximately 43 minutes.
 
 <figure>
-  <img src="../figs/fig1.png" alt="">
+  <img src="./figs/fig1.png" alt="">
   <figcaption>Performance comparison of different training approaches on the AP 3D scores for ’Car’ and ’Cyclist’</figcaption>
 </figure>
 
