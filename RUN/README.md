@@ -115,7 +115,7 @@ OpenPCDet
 ├── tools
 ```
 
-Transfer the files [kitti_training_train.7z]https://drive.google.com/file/d/1W0JvxEo4zHE2B_NkSzU7ZCalocEWlVqB/view?usp=share_link) and [kitti_training_val.7z](https://drive.google.com/file/d/1r2a6aX7GURQHm1ydgB1pySmIN3ygmf6p/view?usp=share_link) to `./OpenPCDet/data` on the VM, and proceed to extract them there. 
+Transfer the files (kitti_training_train.7z)https://drive.google.com/file/d/1W0JvxEo4zHE2B_NkSzU7ZCalocEWlVqB/view?usp=share_link) and [kitti_training_val.7z](https://drive.google.com/file/d/1r2a6aX7GURQHm1ydgB1pySmIN3ygmf6p/view?usp=share_link) to `./OpenPCDet/data` on the VM, and proceed to extract them there. 
 
 These files are identical to the downloaded KITTI data, but they've been split into training and validation sets for convenience. Specifically, the 'kitti_training_train' folder includes only the training samples. These partitioned datasets will facilitate the creation of combined databases.
 
