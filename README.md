@@ -2,12 +2,12 @@
 
 This repository is dedicated to the Master's Thesis in Electrical Engineering and Information Technology at the [Institute for Measurement Systems and Sensor Technology, Technische Universität München](https://www.ee.cit.tum.de/en/mst/home/).
 
-Author: [Aydin Uzun](https://www.linkedin.com/in/aydin-uzun-19455679/)
-Contributor: [M.Eng. Arsalan Haider](https://campus.tum.de/tumonline/visitenkarte.show_vcard?pPersonenId=A0E4CB5D125483F9&pPersonenGruppe=3)
-Assessor: [Prof. Dr.-Ing. habil. Dr. h.c. Alexander W. Koch](https://www.ee.cit.tum.de/mst/team/professor-dr-ing-a-w-koch/)
-External Supervisors: [Dr. Petr Fomin](https://www.linkedin.com/in/dr-petr-fomin/), [Günther Hasna](https://www.linkedin.com/in/gfphasna/?originalSubdomain=de)
-Company: [Ansys Germany GmbH](https://www.linkedin.com/company/ansys-inc/)
-Submission Date: 20.06.2023
+- Author: [Aydin Uzun](https://www.linkedin.com/in/aydin-uzun-19455679/)
+- Contributor: [M.Eng. Arsalan Haider](https://campus.tum.de/tumonline/visitenkarte.show_vcard?pPersonenId=A0E4CB5D125483F9&pPersonenGruppe=3)
+- Assessor: [Prof. Dr.-Ing. habil. Dr. h.c. Alexander W. Koch](https://www.ee.cit.tum.de/mst/team/professor-dr-ing-a-w-koch/)
+- External Supervisors: [Dr. Petr Fomin](https://www.linkedin.com/in/dr-petr-fomin/), [Günther Hasna](https://www.linkedin.com/in/gfphasna/?originalSubdomain=de)
+- Company: [Ansys Germany GmbH](https://www.linkedin.com/company/ansys-inc/)
+- Submission Date: 20.06.2023
 
 This Master's thesis investigates the enhancement of LiDAR-based 3D Object Detection algorithms for autonomous vehicles, using synthetic point cloud data generated from the Ansys AVxcelerate CarMaker Co-Simulation process. The study focuses on integrating and aligning synthetic and real-world data, and applying fine-tuning techniques within the Pointpillars network to optimize the model. The research reveals challenges in ensuring model generalization across different data types, especially when identifying complex entities like pedestrians. The study indicates that a balanced combination of synthetic and real-world data yields promising results. Additionally, a hybrid training approach, consisting of initial pre-training with synthetic data followed by fine-tuning with real-world data, exhibits potential, particularly under conditions of real-world data scarcity. This study thus provides valuable insights to guide future improvements in the training and testing methodologies for autonomous driving systems.
 
@@ -38,4 +38,15 @@ Through these objectives, I aim to provide valuable insights into the benefits a
 ## Contents:
 
 [Thesis](aydin_uzun_ms_thesis.pdf): This is my master thesis pdf document.
-[kitti_models](/kitti_models/)
+[Methodology](/Methodology/): In this part, the research methodology is outlined. Emphasis is placed on the modeling of the LiDAR sensor. It offers a detailed account of the Ansys AVxcelerate CarMaker Co-Simulation process, elaborates on the processing of simulation outputs, and outlines how simulated scenarios are scaled.
+[Experimental_Design](/Experimental_Design/): The part describes the experimental design. It specifies the data sets used, explains the settings of the network, the evaluation metrics, and how KITTI difficulty levels are adapted for synthetic data set evaluation. It also presents the different experiments carried out.
+[Results](/Results/): This part delves into the results from the experiments. A quantitative analysis of the results from each experiment is provided, along with an impact assessment of pre-training and training duration on the Average Precision for 3D object detection (AP 3D) scores. A qualitative analysis on the AVX test set and KITTI test set is also included.
+[Python_scripts](/Python_scripts/):
+[VM_scripts](/VM_scripts/):
+[cfgs](/cfgs/):
+[kitti_models](/kitti_models/) : 
+[docs](/docs/):
+[RUN](/RUN/):
+
+
+
