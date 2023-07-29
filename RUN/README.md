@@ -167,6 +167,8 @@ For additional details, refer to [GETTING_STARTED.md](https://github.com/open-mm
 
 ## Running the Experiments
 
+For detailed information about the experiments, see [README.md](../Experimental_Design/Experiments/README.md).
+
 ### Experiment 1
 
 #### Step 1: Create Trainset for KITTI 
@@ -315,3 +317,102 @@ You can use the previously copied training script [train_modified.py](../VM_scri
 python3 train_modified.py --cfg_file cfgs/kitti_models/AVX_90_kitti_10_train_KITTI.yaml --extra_tag [optional_extra_tag]
 ```
 Replace `optional_extra_tag` with any additional tag if necessary. The evaluation steps will remain the same as described above [Step 3, Step 4, Step 5 of Experiment 1].
+
+### Experiment 3
+
+The cases for 20% KITTI and 50% KITTI are straightforward. Now we'll focus on the 10% KITTI case.
+
+#### 10% KITTI
+
+To create the KITTI trainset with a composition of 10% of the total KITTI data, follow these steps:
+
+1. Utilize the [create_trainset.py](../VM_scripts/create_trainset.py) script.
+2. Modify the `dataset_name` parameter in the script to reflect the desired dataset name.
+3. Set the `my_data_size` parameter to (3712 * 0.1), which represents the total number of samples in the 10% KITTI train dataset.
+4. Adjust the `percent_synthtetic` parameter to 0, indicating that no synthetic data will be included in the trainset.
+5. Copy [kitti_10_train_KITTI.yaml](../cfgs/kitti_10_train_KITTI.yaml) to `./OpenPCDet/tools/cfgs/dataset_configs/`.
+6. Copy [kitti_10_train_KITTI.yaml](../kitti_models/AVX_90_kitti_10_train_KITTI.yaml) to `./OpenPCDet/tools/cfgs/kitti_models/`.
+7. Open the file [kitti_dataset.py](../VM_scripts/kitti_dataset.py) and modify the `data_path` and `save_path` parameters according to your requirements. Remember to use it in training mode! Ensure that you make the necessary adjustments to the script and configuration files to suit your specific needs.
+
+To generate the required data infos for training, execute the following command:
+```console
+python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti_10_train_KITTI.yaml
+```
+You can use the previously copied training script [train_modified.py](../VM_scripts/train_modified.py). Then, run the training using the following command with pre-training:
+```console
+python3 train_modified.py --cfg_file cfgs/kitti_models/kitti_10_train_KITTI.yaml --extra_tag [optional_extra_tag] --pretrained_model [checkpoint_location]
+```
+
+Replace `optional_extra_tag` with any additional tag if necessary. Provide the location of the checkpoint to load the pre-trained parameters using the `checkpoint_location` parameter. The evaluation steps will remain the same as described above [Step 3, Step 4, Step 5 of Experiment 1]. 
+
+To train without pre-training, use the following command:
+
+```console
+python3 train_modified.py --cfg_file cfgs/kitti_models/kitti_10_train_KITTI.yaml --extra_tag [optional_extra_tag]
+```
+Replace `optional_extra_tag` with any additional tag if necessary. The evaluation steps will remain the same as described above [Step 3, Step 4, Step 5 of Experiment 1]. 
+
+## Visualization and Interpretation
+
+### Scores
+
+After the evaluations, navigate to the directories `./OpenPCDet/output/kitti_models/AVX_testset/[extra_tag]` for the evaluation on synthetic data, or `./OpenPCDet/output/kitti_models/KITTI_testset/[extra_tag]` for the evaluation on the real data. In these directories, you will find the 'log_eval_XXXXXX' text files, which contain the Average Precision (AP) scores.
+
+To create plots using the `result_dict.pkl` files for each epoch and evaluation, access the corresponding `result_dict.pkl` files. Utilize these files to generate the necessary plots for further analysis and visualization of the results.
+
+### Demo Video
+
+To generate screenshots of the frames and create a video, follow these steps:
+
+1. Copy the script [demo_video.py](../VM_scripts/demo_video.py) to the directory `./OpenPCDet/tools/`.
+2. Modify the parameters in the script as follows:
+   - `--cfg_file`: Specify the configuration file path.
+   - `--data_path`: Specify the data path.
+   - `--ckpt`: Specify the checkpoint path.
+   - `--ext`: Specify the extension of the point clouds, `.npy` or `.bin`.
+   - `--idx`: Specify the number of frames to capture.
+   - `--name`: Specify the name of the output folder where the screenshots will be saved.
+3. Run the script. It will save screenshots of the first `--idx` frames within the `--data_path`, using the network parameters loaded from `--ckpt`. The outputs will be saved as `.png` files in the specified `--name` folder. The screenshots will display both the detections and the ground truths.
+
+To create a video from the generated screenshots, follow these steps:
+
+1. Copy the script [create_video.py](../VM_scripts/create_video.py) to the directory `./OpenPCDet/tools/`.
+2. Modify the parameters in the script as follows:
+   - `--image_folder`: Specify the folder path containing the screenshots.
+   - `--output_video_path`: Specify the path where the video will be saved.
+   - `--fps`: Specify the frames per second (FPS) for the output video.
+3. Run the script. It will create a video using the screenshots located in the `--image_folder`. The resulting video will be saved at the specified `--output_video_path`, with the desired `--fps` value.
+
+Using these scripts, the videos on the following [repository](https://github.com/aydnzn/Master-Thesis-Supplements) were created.
+
+### Demo Investigate
+
+If you prefer to investigate frames individually by zooming and translating, you can follow these steps:
+1. Copy the script [demo_investigate.py](../VM_scripts/demo_investigate.py) to the directory `./OpenPCDet/tools/`.
+2. Modify the parameters in the script as follows:
+   - `--cfg_file`: Specify the configuration file path.
+   - `--data_path`: Specify the data path.
+   - `--ckpt`: Specify the checkpoint path.
+3. Run the script. It will allow you to investigate frames one by one, providing zooming and translation capabilities.
+
+### Visualizing Ground Truth Data 
+
+To visualize the ground truth data and object point clouds used for data augmentation in OpenPCDet, follow these steps:
+1. Copy the script [visualize_gtdatabase.py](../VM_scripts/visualize_gtdatabase.py) to the `./OpenPCDet/` directory.
+2. Run the script using the command:
+   ```console
+   python3 visualize_gtdatabase.py --object_class [object_class] --folder_path [folder_path]
+   ```   
+Replace `object_class` with the desired object class (e.g., Car).
+Replace `folder_path` with the path to the folder containing the ground truth database (e.g., data/AVX_testset/gt_database).
+
+To visualize ground truth boxes on point clouds, follow these steps:
+
+1. Copy the script [visualize_gtboxes.py](../VM_scripts/visualize_gtboxes.py) to the `./OpenPCDet/` directory.
+2. Run the script using the command:
+   ```console
+    python3 visualize_gtboxes.py --pkl_path [pkl_path] --extension [extension]
+   ```   
+Replace `pkl_path` with the path to the `.pkl` file containing the ground truth box information (e.g., ./data/KITTI_testset/kitti_infos_val.pkl).
+Replace `extension` with the file extension of the point clouds (e.g., .npy).
+
