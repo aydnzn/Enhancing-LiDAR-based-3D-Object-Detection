@@ -1,3 +1,8 @@
+"""
+This script is a modified version of a script originally found at: https://github.com/open-mmlab/OpenPCDet.
+
+Many thanks to the authors of OpenPCDet for their work. 
+"""
 import _init_path
 import argparse
 import datetime
