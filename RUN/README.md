@@ -210,3 +210,59 @@ For additional details, refer to [GETTING_STARTED.md](https://github.com/open-mm
     python3 train_modified.py --cfg_file cfgs/kitti_models/pointpillar_kitti.yaml --extra_tag $(if_you_need)$
     ```
 
+#### Step 3: Single epoch Evaluation
+
+For KITTI evaluation, if you only want to evaluate the last epoch, copy the script [test_single_KITTI.py](../VM_scripts/test_single_KITTI.py) to `./OpenPCDet/tools/`. Use the following command to run the evaluation:
+
+```console
+python3 test_single_KITTI.py --ckpt [specify_checkpoint_directory] --extra_tag [optional_extra_tag]
+```
+You should replace `specify_checkpoint_directory` with the directory where your checkpoint is located. Optionally, include the `--extra_tag` parameter if needed.
+
+For AVX evaluation, do the same with [test_single_AVX.py](../VM_scripts/test_multiple_AVX.py).
+
+#### Step 4: Multiple epoch Evaluation
+
+To evaluate multiple epochs selectively, copy the script [select_checkpoints](../VM_scripts/select_checkpoints.py) to `./OpenPCDet/tools/`. This step allows you to choose specific checkpoints for evaluation. If you wish to evaluate all checkpoints, you can skip this step, but note that it may take longer.
+
+Inside [select_checkpoints](../VM_scripts/select_checkpoints.py) you can also modify the following:
+
+```python
+    checkpoints_to_copy = [1, 10, 20, 30, 40, 50, 60, 70, 80]
+```
+
+to specify the checkpoints you want to copy and then evaluate later. Execute the following command to run the selection process:
+
+```console
+python3 select_checkpoints.py [checkpoint_directory]
+```
+
+Replace `checkpoint_directory` with the actual path to the directory containing the checkpoints.
+
+For KITTI evaluation with multiple epochs, copy the script [test_multiple_KITTI.py](../VM_scripts/test_multiple_KITTI.py) to `./OpenPCDet/tools/`. Use the following command to perform the evaluation:
+ ```console
+python3 test_multiple_KITTI.py --ckpt_dir [specify_checkpoints_directory] --extra_tag [optional_extra_tag]
+```
+Replace `specify_checkpoints_directory` with the actual directory path of the checkpoints. Additionally, include the `--extra_tag` parameter if needed.
+
+Similarly, for AVX evaluation with multiple epochs, copy the script [test_multiple_AVX.py](../VM_scripts/test_multiple_AVX.py) to `./OpenPCDet/tools/`. Use the following command:
+```console
+python3 test_multiple_AVX.py --ckpt [specify_checkpoints_directory] --extra_tag [optional_extra_tag]
+```
+Replace `specify_checkpoints_directory` with the actual directory path of the checkpoints. Add the `--extra_tag` parameter if required.
+
+#### Step 5: Visualizing Epoch Evolution with TensorBoard
+
+Once you have the results of your epoch evaluations, you can visualize them with TensorBoard. To do this, follow these steps:
+
+1. Copy the script [tensorboard_visualize.sh](../VM_scripts/tensorboard_visualize.sh) to `./OpenPCDet/`.
+2. Modify the `log_dir` parameter in the script to specify the directory containing the log files.
+3. Run the script as an executable:
+```console
+./tensorboard_visualize.sh
+```
+4. Open your preferred web browser and access the generated TensorBoard visualization.
+By executing these steps, you will be able to visualize and analyze the epoch evolution graphs using TensorBoard.
+
+#### Step 6: Traim AVX
+
