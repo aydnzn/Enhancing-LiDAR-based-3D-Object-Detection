@@ -1,15 +1,17 @@
 # This script is a modified version of a script originally found at: https://github.com/open-mmlab/OpenPCDet.
 # Many thanks to the authors of OpenPCDet for their work. 
 DATASET: 'KittiDataset'
-DATA_PATH: '../data/KITTI_testset'
+DATA_PATH: '../data/kitti'
 
 POINT_CLOUD_RANGE: [0, -39.68, -3, 69.12, 39.68, 1]
 
 DATA_SPLIT: {
+    'train': train,
     'test': val
 }
 
 INFO_PATH: {
+    'train': [kitti_infos_train.pkl],
     'test': [kitti_infos_val.pkl],
 }
 

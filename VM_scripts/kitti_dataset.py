@@ -1,3 +1,8 @@
+"""
+This script is a modified version of a script originally found at: https://github.com/open-mmlab/OpenPCDet.
+
+Many thanks to the authors of OpenPCDet for their work. 
+"""
 import copy
 import pickle
 
@@ -480,6 +485,6 @@ if __name__ == '__main__':
         create_kitti_infos(
             dataset_cfg=dataset_cfg,
             class_names=['Car', 'Pedestrian', 'Cyclist'],
-            data_path=ROOT_DIR / 'data' / 'AVX_demoset',
-            save_path=ROOT_DIR / 'data' / 'AVX_demoset'
+            data_path=ROOT_DIR / 'data' / 'AVX_testset',
+            save_path=ROOT_DIR / 'data' / 'AVX_testset'
         )

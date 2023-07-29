@@ -164,3 +164,49 @@ python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/data
 This data info will store necessary parameters, such as bounding box information, for training and evaluation.
 
 For additional details, refer to [GETTING_STARTED.md](https://github.com/open-mmlab/OpenPCDet/blob/master/docs/GETTING_STARTED.md).
+
+## Running the Experiments
+
+### Experiment 1
+
+#### Step 1: Create Trainset for KITTI 
+
+1. Transfer [kitti.yaml](../cfgs/kitti.yaml) to the VM directory `./OpenPCDet/tools/cfgs/dataset_configs/`.
+
+2. Transfer [pointpillar_kitti.yaml](../kitti_models/pointpillar_kitti.yaml) to the VM directory `./OpenPCDet/tools/cfgs/kitti_models/`.
+
+3. Modify the [kitti_dataset.py](../VM_scripts/kitti_dataset.py) file, which is already transferred to `./OpenPCDet/pcdet/datasets/kitti/`. Uncomment the sections related to training and comment the sections related to testing. For instance, uncomment the following block:
+
+    ```python
+    ##################### START for TRAIN
+    # For Train use this part, for Test comment this part
+    dataset.set_split(train_split)
+    kitti_infos_train = dataset.get_infos(num_workers=workers, has_label=True, count_inside_pts=True)
+    with open(train_filename, 'wb') as f:
+        pickle.dump(kitti_infos_train, f)
+    print('Kitti info train file is saved to %s' % train_filename)
+
+    print('---------------Start create groundtruth database for data augmentation---------------')
+    dataset.set_split(train_split)
+    dataset.create_groundtruth_database(train_filename, split=train_split)
+    ##################### END for TRAIN
+    ```
+
+4. Inside [kitti_dataset.py](../VM_scripts/kitti_dataset.py), adjust the `data_path` and `save_path` parameters according to your specific needs. Make sure to change the values to `kitti`.
+
+#### Step 2: Train KITTI
+
+1. Run the following command to generate the data info needed for training:
+
+    ```console
+    python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/kitti.yaml 
+    ```
+
+2. Copy [train_modified.py](../VM_scripts/train_modified.py) to `./OpenPCDet/tools/`.
+
+3. Start the training process with this command:
+
+    ```console
+    python3 train_modified.py --cfg_file cfgs/kitti_models/pointpillar_kitti.yaml --extra_tag $(if_you_need)$
+    ```
+
