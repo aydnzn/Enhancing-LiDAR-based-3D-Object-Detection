@@ -288,4 +288,30 @@ python3 train_modified.py --cfg_file cfgs/kitti_models/AVX_trainset.yaml --extra
 ```
 Replace `optional_extra_tag` with any additional tag if necessary. The evaluation steps will remain the same as described above [Step 3, Step 4, Step 5].
 
+### Experiment 2
 
+For AVX trainsets consisting of 80% AVX and 20% KITTI data, and AVX trainsets with an equal distribution of 50% AVX and 50% KITTI data, the process is straightforward. Now we'll focus on the AVX 90% KITTI 10% case. 
+
+#### AVX 90% KITTI 10%
+
+To create the AVX trainset with a composition of 90% AVX and 10% KITTI data, follow these steps:
+
+1. Utilize the [create_trainset.py](../VM_scripts/create_trainset.py) script.
+2. Modify the `dataset_name` parameter in the script to reflect the desired dataset name.
+3. Set the `my_data_size` parameter to 3712, which represents the total number of samples in the KITTI train dataset.
+4. Adjust the `percent_synthtetic` parameter to 0.9, indicating the desired proportion of AVX data.
+5. Copy [AVX_90_kitti_10_train_KITTI.yaml](../cfgs/AVX_90_kitti_10_train_KITTI.yaml) to `./OpenPCDet/tools/cfgs/dataset_configs/`.
+6. Copy [AVX_90_kitti_10_train_KITTI.yaml](../kitti_models/AVX_90_kitti_10_train_KITTI.yaml) to `./OpenPCDet/tools/cfgs/kitti_models/`.
+7. Open the file [kitti_dataset.py](../VM_scripts/kitti_dataset.py) and modify the `data_path` and `save_path` parameters according to your requirements. Remember to use it in training mode! Ensure that you make the necessary adjustments to the script and configuration files to suit your specific needs.
+
+To generate the required data infos for training, execute the following command:
+
+```console
+python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/AVX_90_kitti_10_train_KITTI.yaml
+```
+
+You can use the previously copied training script [train_modified.py](../VM_scripts/train_modified.py). Then, run the training using the following command:
+```console
+python3 train_modified.py --cfg_file cfgs/kitti_models/AVX_90_kitti_10_train_KITTI.yaml --extra_tag [optional_extra_tag]
+```
+Replace `optional_extra_tag` with any additional tag if necessary. The evaluation steps will remain the same as described above [Step 3, Step 4, Step 5 of Experiment 1].
