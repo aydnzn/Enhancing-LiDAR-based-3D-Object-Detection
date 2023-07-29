@@ -35,18 +35,18 @@ The main objectives are outlined below.
 
 Through these objectives, I aim to provide valuable insights into the benefits and challenges of using synthetic data in training object detection algorithms for autonomous vehicles. 
 
-## Contents:
+## Contents
 
-[Thesis](aydin_uzun_ms_thesis.pdf): This is my master thesis pdf document.
-[Methodology](/Methodology/): In this part, the research methodology is outlined. Emphasis is placed on the modeling of the LiDAR sensor. It offers a detailed account of the Ansys AVxcelerate CarMaker Co-Simulation process, elaborates on the processing of simulation outputs, and outlines how simulated scenarios are scaled.
-[Experimental_Design](/Experimental_Design/): The part describes the experimental design. It specifies the data sets used, explains the settings of the network, the evaluation metrics, and how KITTI difficulty levels are adapted for synthetic data set evaluation. It also presents the different experiments carried out.
-[Results](/Results/): This part delves into the results from the experiments. A quantitative analysis of the results from each experiment is provided, along with an impact assessment of pre-training and training duration on the Average Precision for 3D object detection (AP 3D) scores. A qualitative analysis on the AVX test set and KITTI test set is also included.
-[Python_scripts](/Python_scripts/):
-[VM_scripts](/VM_scripts/):
-[cfgs](/cfgs/):
-[kitti_models](/kitti_models/) : 
-[docs](/docs/):
-[RUN](/RUN/):
+- [Thesis](aydin_uzun_ms_thesis.pdf): This is my Master's thesis PDF document.
+- [Methodology](/Methodology/): This section outlines the research methodology, emphasizing the LiDAR sensor modeling. It provides a detailed explanation of the Ansys AVxcelerate CarMaker Co-Simulation process, the processing of simulation outputs, and how simulated scenarios are scaled.
+- [Experimental_Design](/Experimental_Design/): This section describes the experimental design, specifying the datasets used, network settings, evaluation metrics, and the adaptation of KITTI difficulty levels for synthetic dataset evaluation. It also presents the different experiments carried out.
+- [Results](/Results/): This section delves into the results from the experiments. It provides a quantitative analysis of the results from each experiment, along with an assessment of pre-training and training duration impact on the Average Precision for 3D object detection (AP 3D) scores. It also includes a qualitative analysis on the AVX test set and KITTI test set.
+- [Python_scripts](/Python_scripts/): These are the Python scripts required to process the synthetic point clouds to create the KITTI labels, calibration files, etc. See the [README.md](./RUN/README.md) for usage instructions.
+- [VM_scripts](/VM_scripts/): These are scripts required for training, evaluation, data preparation, and point cloud visualization and need to be transferred to the virtual machine. Refer to the [README.md](./RUN/README.md) for usage instructions.
+- [cfgs](/cfgs/): These are configuration files required for training and evaluation according to [OpenPCDet](https://github.com/open-mmlab/OpenPCDet).
+- [kitti_models](/kitti_models/): These are the Pointpillars network models required for training and evaluation, according to [OpenPCDet](https://github.com/open-mmlab/OpenPCDet).
+- [docs](/docs/): These are some necessary documents for the other README's I have created.
+- [RUN](/RUN/README.md): This README explains how to run the whole framework. It includes creating the synthetic point clouds, their labels, preparing them for training, conducting training and evaluation, and visualization instructions. 
 
 
 
