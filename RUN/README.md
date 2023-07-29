@@ -91,7 +91,7 @@ Test
 
 The experiments were conducted using Python 3.10.6, compiled with GCC 11.3.0. Training and testing of the models were carried out using PyTorch version 1.13.1+cu117, with support from NVIDIA's CUDA toolkit (version 11.7) for GPU-accelerated operations.
 
-## Training and Evaluation
+## OpenPCDet
 
 The [OpenPCDet](https://github.com/open-mmlab/OpenPCDet) platform is utilized for training and evaluation.
 
@@ -264,5 +264,28 @@ Once you have the results of your epoch evaluations, you can visualize them with
 4. Open your preferred web browser and access the generated TensorBoard visualization.
 By executing these steps, you will be able to visualize and analyze the epoch evolution graphs using TensorBoard.
 
-#### Step 6: Traim AVX
+#### Step 6: Train AVX
+
+To create the AVX trainset, follow these steps:
+
+1. Utilize the [create_trainset.py](../VM_scripts/create_trainset.py) script.
+2. Modify the `dataset_name` parameter in the script to reflect the desired dataset name.
+3. Adjust the `my_data_size` parameter to match the data size of the AVX trainset (your synthetic train set).
+4. Set the `percent_synthtetic` parameter to 1 to include only AVX data.
+5. Copy [AVX_trainset_KITTI.yaml](../cfgs/AVX_trainset_KITTI.yaml) to `./OpenPCDet/tools/cfgs/dataset_configs/`.
+6. Copy [AVX_trainset.yaml](../kitti_models/AVX_trainset.yaml) to `./OpenPCDet/tools/cfgs/kitti_models/`
+7. Open the file [kitti_dataset.py](../VM_scripts/kitti_dataset.py) and modify the `data_path` and `save_path` parameters according to your requirements. Again use it in training mode! Ensure that you make the necessary adjustments to the script and configuration files to suit your specific needs.
+
+To generate the required data infos for training, execute the following command:
+
+```console
+python3 -m pcdet.datasets.kitti.kitti_dataset create_kitti_infos tools/cfgs/dataset_configs/AVX_trainset_KITTI.yaml
+```
+You can use the previously copied training script [train_modified.py](../VM_scripts/train_modified.py). Then, run the training using the following command:
+
+```console
+python3 train_modified.py --cfg_file cfgs/kitti_models/AVX_trainset.yaml --extra_tag [optional_extra_tag]
+```
+Replace `optional_extra_tag` with any additional tag if necessary. The evaluation steps will remain the same as described above [Step 3, Step 4, Step 5].
+
 
