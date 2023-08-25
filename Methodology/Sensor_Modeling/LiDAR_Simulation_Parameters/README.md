@@ -13,7 +13,8 @@ For LiDAR sensors, the parameter file lets users define the output data format a
 
 Here is the JSON parameter configuration for the AVX simulation:
 
-```json
+<!-- JSON Configuration Example:
+
 {
     "sensorSimulationParameters": [{
         "identifier": "lidar",
@@ -30,10 +31,12 @@ Here is the JSON parameter configuration for the AVX simulation:
                 }
             },
             "waveform": false,
-            "numberOfBatches":1
+            "numberOfBatches": 1
         }
     }]
 }
-```
+
+-->
+
 
 This configuration defines the setup and properties of the LiDAR sensor simulation. For more details, Please refer to the [full thesis document](../../../aydin_uzun_ms_thesis.pdf).
